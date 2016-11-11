@@ -16,20 +16,20 @@ int main(void)
 	double a = 0;
 	int n = 0; 
 	int m = 0;
-	cout << "n = "; 
+	cout << "n = "; // заранее неизвестное количество строк матрицы
 	cin >> n; 
-	cout << "m = "; 
+	cout << "m = "; // заранее неизвестное количество столбцов матрицы
 	cin >> m;
 
-	pparray = (double **)malloc(n*sizeof(double *));
-		for (int i = 0; i < n; i++ ) pparray[i] = (double *)malloc(m*sizeof(double));
+	pparray = (double **)malloc(n*sizeof(double *)); // Инициализация указателя на указатель
+		for (int i = 0; i < n; i++ ) pparray[i] = (double *)malloc(m*sizeof(double)); // Динамическое выделение памяти
 
 	cout << endl << "Two-dimensional array (matrix)" << endl << endl;
 		for ( int i = 0; i < n; i++ )
 		{
 			for ( int j = 0; j < m; j++ ) 
 			{
-				pparray[i][j] = rand() % 100;
+				pparray[i][j] = rand() % 100; // Заполнение матрицы случайными числами в интервале [0, 100)
 				cout << pparray[i][j] << " ";
 			}
 		cout << endl;
@@ -39,9 +39,9 @@ int main(void)
 		{
 			for ( int j = 0; j < m/2; j++ )
 			{
-				a = pparray[i][j];
-				pparray[i][j] = pparray[i][m-1-j];
-				pparray[i][m-1-j] = a;
+				a = pparray[i][j]; // Дополнительная переменная для хранения элемента i-ой строки и j-ого столбца
+				pparray[i][j] = pparray[i][m-1-j]; // Присвоение элементу i-ой строки и j-ого столбца значения элемента i-ой строки и (m-1-j)-ого столбца
+				pparray[i][m-1-j] = a; // Присвоение  элементу i-ой строки и (m-1-j)-ого столбца значения переменной а
 			}
 		}
 
@@ -55,7 +55,7 @@ int main(void)
 		}
 
 		for (int i = 0; i < n; i++ ) free(pparray[i]);
-		free(pparray);
+		free(pparray); // Освобождение памяти
 
 	cout << endl << "Press any button to exit the program";
 	_getch();
